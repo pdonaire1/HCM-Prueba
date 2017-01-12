@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load links_solicitante %}
+{% block title %}Mis Solicitudes de Vacante{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <p>¿Seguro que desea eliminar la solicitud "<b>{{ object.descripcion }}</b>"?</p>
+        <input type="submit" value="Confirmar" />
+    </form>
+{% endblock %}

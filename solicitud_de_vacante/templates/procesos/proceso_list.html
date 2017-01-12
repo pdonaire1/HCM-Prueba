@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Listar Procesos{% endblock %}
+
+{% block content %}
+  <ul>
+    {% for object in object_list %}
+    <li> 
+      <b>{{ object.nombre }}</b>
+      ({{ object.solicitante }} {{ object.created_at }}) -
+      <a href="{% url 'proceso-details' object.id %}">Ver proceso</a>
+    </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'home' %}">home</a>
+{% endblock %}

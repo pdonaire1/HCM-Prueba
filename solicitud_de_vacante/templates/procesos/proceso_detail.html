@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load links_solicitante %}
+{% block title %}Mis Solicitudes de Vacante{% endblock %}
+
+{% block content %}
+  <h3>Nombre: {{ object.nombre }}</h3>
+  <p>
+  	Solicitud: 
+  	<a href="{% url 'solicitud-vacante-details' object.solicitud.id %}">
+  		{{ object.solicitud.descripcion }}
+  	</a>
+  </p>
+  <p>Fecha: {{ object.created_at }}</p>
+  
+  <a href="{% url 'eliminar-proceso' object.id %}">Eliminar procesos</a><br/>
+  <br><br>
+  <a href="{% url 'listar-procesos' %}">Listar procesos</a><br/>
+  <a href="{% url 'home' %}">home</a>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="Pablo Gonzalez">
+
+    <title>Job Evaluation </title>
+
+    
+    {% block extra_head %} {% endblock %}
+    
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <center>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <b>{{ message }}</b>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <!-- links -->
+        {% if request.user.is_authenticated %}
+            <b>{{ request.user }}</b>
+            <a href="{% url 'logout' %}">logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">login</a>
+        {% endif %}
+
+        
+        <h1>{% block title %} {% endblock %}</h1>
+    	{% block content %} {% endblock %}
+    </center>
+
+
+    {% block extra_js %} {% endblock %}
+
+</body>
+
+</html>

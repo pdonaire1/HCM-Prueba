@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load links_solicitante %}
+{% block title %}Mis Solicitudes de Vacante{% endblock %}
+
+{% block content %}
+  <h3>Descripción: {{ object.descripcion }}</h3>
+  <p>Solicitante: {{ object.solicitante }}</p>
+  <p>
+    Aprobado: 
+    {% if object.aprobado == None %} 
+      En espera 
+    {% elif object.aprobado %}
+      Si
+    {% else %} 
+      No 
+    {% endif %}
+  </p>
+  <p>Cantidad Vacantes: {{ object.cantidad_vacantes }}</p>
+  <p>Cargo: {{ object.cargo|get_cargo }}</p>
+  <p>Jornada: {{ object.jornada|get_jornada }}</p>
+  <p>Salario: {{ object.salario|null_registro }}</p>
+  <p>Estatus: {{ object.estatus|get_estatus }}</p>
+  <p>Fecha: {{ object.created_at }}</p>
+  <hr/>
+  <h3>Revisiones:</h3>
+  <ul>
+  {% for comentario in comentarios %}
+    <li>
+      <b>Por: {{comentario.usuario.username}}</b>
+      {% if comentario.comentario %}
+        <p>{{comentario.comentario}}</p>
+      {% else %}
+        Sin comentario
+      {% endif %}
+  {% empty %}
+    </li>
+    <li>Sin Revisiones</li>
+  {% endfor %}
+  </ul>
+  <hr/>
+  {% if request.user.is_authenticated %}
+    {% if request.user|puede_revisar_y_comentar == 'revisar_y_comentar' %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+      </form>
+    {% elif request.user|puede_revisar_y_comentar == 'responsable_del_proceso' and ya_tiene_proceso == False %}
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+      </form>
+    {% elif request.user|puede_revisar_y_comentar and ya_tiene_proceso == True %}
+      <a href="{% url 'proceso-details' proceso_id %}">Ver proceso de la solicitud</a><br>
+    {% elif request.user|puede_eliminar_solicitud:object %}
+      <a href="{% url 'eliminar-solicitud' object.id %}">Eliminar Solicitud</a>
+      <br><br><br>
+    {% endif %}
+
+    {% if request.user.id|es_solicitante:request.user %}
+      <a href="{% url 'crear-solicitud-vacante' %}">Crear Solicitud de Vacante</a><br>
+    {% endif %}
+    <a href="{% url 'listar-solicitud-vacante' %}">Listar Vacantes</a><br>
+  {% endif %}
+  <a href="{% url 'home' %}">home</a>
+{% endblock %}

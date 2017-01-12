@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Solicitudes de Vacante{% endblock %}
+
+{% block content %}
+  <ul>
+    {% for solicitud in object_list %}
+    <li> 
+    	<b>{{ solicitud.descripcion }}</b>
+    	({{ solicitud.solicitante }} {{ solicitud.created_at }}) -
+    	<a href="{% url 'solicitud-vacante-details' solicitud.id %}">Ver</a>
+    {% comment %}
+    <!-- <a href="{% url "solicitud_delete" solicitud.id %}">delete</a> -->
+    {% endcomment %}
+    </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'home' %}">home</a>
+{% endblock %}

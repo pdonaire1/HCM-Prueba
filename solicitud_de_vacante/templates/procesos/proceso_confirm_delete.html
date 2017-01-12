@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load links_solicitante %}
+{% block title %}Procesos{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <p>¿Seguro que desea eliminar el proceso "<b>{{ object.nombre }}</b>"?</p>
+        <input type="submit" value="Confirmar" />
+    </form>
+{% endblock %}

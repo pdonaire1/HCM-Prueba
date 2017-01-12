@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load links_solicitante %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <h2>Home</h2>
+  <hr>
+
+  <!-- links -->
+  {% if request.user.is_authenticated %}
+    {% if request.user.id|es_solicitante:request.user %}
+      <a href="{% url 'crear-solicitud-vacante' %}">Crear Solicitud de Vacante</a><br>
+     {% elif request.user.id|es_responsable:request.user %}
+     	<a href="{% url 'listar-procesos' %}">Listar mis procesos</a><br/>
+    {% endif %}
+    <a href="{% url 'listar-solicitud-vacante' %}">Listar Vacantes</a><br>
+  {% endif %}
+{% endblock %}
