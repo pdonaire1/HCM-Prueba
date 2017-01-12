@@ -12,8 +12,10 @@ Instalación:
 pip install requirements.txt
 python manage.py runserver
 ```
-Usuarios:
 Contraseña: `usuario123`
+
+Usuarios:
+
 * admin
 * solicitante
 * aprobador1
