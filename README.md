@@ -7,14 +7,14 @@ Como objetivo de esta prueba se busca desarrollar (estructurar, diseñar y imple
 módulo que permita enviar solicitudes de vacante con una serie de aprobaciones para la posterior
 asignación y creación de un proceso. [leer más...](https://github.com/pdonaire1/HCM-Prueba/blob/master/Vacante%20Desarrollador%20HCMFront.pdf)
 
-Instalación:
+**Instalación:**
 ```
 pip install requirements.txt
 python manage.py runserver
 ```
-Contraseña: `usuario123`
+**Contraseña:** `usuario123`
 
-Usuarios:
+**Usuarios:**
 
 * admin
 * solicitante
